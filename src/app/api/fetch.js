@@ -50,4 +50,16 @@ const findAllBlog = async () => {
   }
 };
 
-module.exports = { userLogin, userRegister, findAllBlog, findUserAndId};
+const findBlogById = async (postId) => {
+  try {
+    const response = await instance.get(`/detail-post/${postId}`)
+    return response
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+}
+
+module.exports = { userLogin, userRegister, findAllBlog, findUserAndId, findBlogById};

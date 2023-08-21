@@ -9,7 +9,7 @@ import { findUserAndId } from "@/app/api/fetch";
 const Navbar = () => {
   const routerName = usePathname();
   const router = useRouter();
-  const [username, setUsername] = useState([]); // State untuk menyimpan username
+  const [username, setUsername] = useState([]); 
 
   const isPage = routerName === "/login" || routerName === "/signup";
   const getUsername = Cookies.get("username");
@@ -17,7 +17,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userData = await findUserAndId(); // Ganti dengan fungsi/API yang sesuai
+        const userData = await findUserAndId(); 
         const usernames = userData.data.map((user) => user.username);
         setUsername(usernames);
       } catch (error) {
@@ -28,7 +28,7 @@ const Navbar = () => {
     fetchUserData();
   }, []);
 
-  const loggedInUsername = getUsername;
+  const loggedInUsername = getUsername || 1234 //sementara di buat seperti ini karena jika getUsername === null, maka akan error jadi butuh suatu untuk melakukan kondisional 
 
   const handleLog = () => {
     if (loggedInUsername) {
