@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <div className="flex  mx-[105px] my-5">
+      <div className="flex  mx-[105px] mt-14 mb-6">
         &copy; 2023 Artha Gusfi Putra
         <span className="mx-2 border-r-2 border-slate-400"></span>
         <a className="mx-2" href="">

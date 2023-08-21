@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata = {
   title: "My Blog",
@@ -13,12 +13,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-          <main className="app">
-            <Navbar />
-            {children}
-            <Footer />
-          </main>
-        <ToastContainer/>
+        <main className="app">
+          <Navbar />
+          {children}
+          <Footer />
+        </main>
+        <ToastContainer />
       </body>
     </html>
   );
