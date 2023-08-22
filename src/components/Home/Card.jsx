@@ -32,7 +32,7 @@ const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg">
       <img
-        src="https://fakeimg.pl/350x200/ff0000/000"
+        src="https://fakeimg.pl/350x200/"
         alt="fakeimage"
         className="w-full h-48 object-cover rounded-md"
       />

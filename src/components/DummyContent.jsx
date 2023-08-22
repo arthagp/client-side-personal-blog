@@ -4,8 +4,9 @@ import Image from "next/image";
 const DummyContent = () => {
   return (
     <>
+    {/* '/cardRightUp.jpeg' */}
       <div className="w-[350px] ml-[87px] mt-5">
-        <div className="bg-slate-100 mx-auto rounded-lg">
+        <div className="bg-slate-100 mx-auto rounded-lg shadow-xl">
           <div style={{ width: "100%", height: "100%" }}>
             <Image
               src='/cardRightUp.jpeg'

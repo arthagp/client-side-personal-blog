@@ -52,14 +52,33 @@ const findAllBlog = async () => {
 
 const findBlogById = async (postId) => {
   try {
-    const response = await instance.get(`/detail-post/${postId}`)
-    return response
+    const response = await instance.get(`/detail-post/${postId}`);
+    return response;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
       console.log("Something Went Wrong")
     );
   }
-}
+};
 
-module.exports = { userLogin, userRegister, findAllBlog, findUserAndId, findBlogById};
+const createComment = async ({ postId, comment }) => {
+  try {
+    const response = await instance.post(`/new-comment/${postId}`, { comment });
+    return response;
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+};
+
+module.exports = {
+  userLogin,
+  userRegister,
+  findAllBlog,
+  findUserAndId,
+  findBlogById,
+  createComment,
+};

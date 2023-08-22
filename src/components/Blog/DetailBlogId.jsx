@@ -1,6 +1,15 @@
-import React from "react";
+'use client'
+import React, {useState} from "react";
+import Comments from "./Comments";
 
-const DetailBlogId = ({ initDate, initTitle, initDesc, initTags }) => {
+const DetailBlogId = ({
+  initDate,
+  initTitle,
+  initDesc,
+  initTags,
+  comments,
+  blogId,
+}) => {
   const formatDate = (dateString) => {
     const options = {
       weekday: "long",
@@ -27,14 +36,20 @@ const DetailBlogId = ({ initDate, initTitle, initDesc, initTags }) => {
     "bg-lime-200",
   ];
 
+  const [commentsState, setCommentsState] = useState(comments);
+
+  const handleAddComment = (newComment) => {
+    setCommentsState((prevComments) => [newComment, ...prevComments]);
+  };
+
   return (
-    <div className="bg-slate-300 text-black p-5 rounded-lg shadow-lg">
-      <p className="text-sm text-gray-500">{formatDate(initDate)}</p>
+    <div className="text-black p-5 rounded-lg shadow-lg">
+      <p className="text-sm text-[#6941C6]">{formatDate(initDate)}</p>
       <h2 className="text-xl font-semibold mt-2">{initTitle}</h2>
       <img
-        src="https://fakeimg.pl/450x300/ff0000/000"
+        src="https://fakeimg.pl/850x350/"
         alt="fakeimage"
-        className="w-full h-48 object-cover mt-4 rounded-md"
+        className="w-full h-[350px] object-cover mt-4 rounded-md"
       />
       <p className="mt-4">{initDesc}</p>
       <div className="mt-4 flex flex-wrap gap-2">
@@ -48,6 +63,9 @@ const DetailBlogId = ({ initDate, initTitle, initDesc, initTags }) => {
             {tag}
           </div>
         ))}
+      </div>
+      <div className="my-6">
+      <Comments key={commentsState.id} comments={commentsState} postId={blogId} onCommentAdded={handleAddComment} />
       </div>
     </div>
   );
