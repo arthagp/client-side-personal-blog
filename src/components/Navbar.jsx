@@ -9,7 +9,7 @@ import { findUserAndId } from "@/app/api/fetch";
 const Navbar = () => {
   const routerName = usePathname();
   const router = useRouter();
-  const [username, setUsername] = useState([]); 
+  const [username, setUsername] = useState([]);
 
   const isPage = routerName === "/login" || routerName === "/signup";
   const getUsername = Cookies.get("username");
@@ -17,7 +17,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userData = await findUserAndId(); 
+        const userData = await findUserAndId();
         const usernames = userData.data.map((user) => user.username);
         setUsername(usernames);
       } catch (error) {
@@ -28,7 +28,7 @@ const Navbar = () => {
     fetchUserData();
   }, []);
 
-  const loggedInUsername = getUsername || 1234 //sementara di buat seperti ini karena jika getUsername === null, maka akan error jadi butuh suatu untuk melakukan kondisional 
+  const loggedInUsername = getUsername || 1234; //sementara di buat seperti ini karena jika getUsername === null, maka akan error jadi butuh suatu untuk melakukan kondisional
 
   const handleLog = () => {
     if (loggedInUsername) {
@@ -50,7 +50,9 @@ const Navbar = () => {
         {username.includes(loggedInUsername) ? (
           <h1 className="text-xl font-semibold">Welcome {loggedInUsername}</h1>
         ) : (
-          <h1 className="text-xl font-semibold">THE BLOG.</h1>
+          <Link href='/dashboard'>
+            <h1 className="text-xl font-semibold">THE BLOG.</h1>
+          </Link>
         )}
         <div className="flex justify-center items-center">
           <ul className="flex space-x-4">

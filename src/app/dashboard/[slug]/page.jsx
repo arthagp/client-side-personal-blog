@@ -10,12 +10,16 @@ import Cookies from "js-cookie";
 const DetailBlog = ({ params }) => {
   const [blog, setBlog] = useState();
   const router = useRouter();
+  const [authorId, setAuthorId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await findBlogById(params.slug);
+        setAuthorId(response.data.user_id);
         setBlog(response.data);
+        console.log(response.data);
+        console.log(response.data.Comments)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -23,10 +27,10 @@ const DetailBlog = ({ params }) => {
     fetchData();
   }, []);
 
-
   if (!blog) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <>
@@ -54,8 +58,10 @@ const DetailBlog = ({ params }) => {
               initDesc={blog.data.description}
               initTitle={blog.data.title}
               initTags={blog.data.Tags.map((tag) => tag.name)}
-              comments={blog.data.Comments}
+              comments={blog.data.Comments} //melempar semua properti yang di butuhkan di comment
               blogId={params.slug}
+              authorId={blog.data.user_id}
+          
             />
           </div>
         </div>

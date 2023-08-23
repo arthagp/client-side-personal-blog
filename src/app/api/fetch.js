@@ -74,6 +74,18 @@ const createComment = async ({ postId, comment }) => {
   }
 };
 
+const deleteComment = async (commentId) => {
+  try {
+    const response = await instance.delete(`/comment/${commentId}`);
+    return response
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+};
+
 module.exports = {
   userLogin,
   userRegister,
@@ -81,4 +93,5 @@ module.exports = {
   findUserAndId,
   findBlogById,
   createComment,
+  deleteComment,
 };

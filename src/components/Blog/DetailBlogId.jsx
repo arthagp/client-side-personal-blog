@@ -1,6 +1,7 @@
-'use client'
-import React, {useState} from "react";
+"use client";
+import React, { useState } from "react";
 import Comments from "./Comments";
+import Cookies from "js-cookie";
 
 const DetailBlogId = ({
   initDate,
@@ -9,6 +10,7 @@ const DetailBlogId = ({
   initTags,
   comments,
   blogId,
+  authorId,
 }) => {
   const formatDate = (dateString) => {
     const options = {
@@ -37,10 +39,12 @@ const DetailBlogId = ({
   ];
 
   const [commentsState, setCommentsState] = useState(comments);
+  console.log('Common state: ',commentsState)
 
   const handleAddComment = (newComment) => {
     setCommentsState((prevComments) => [newComment, ...prevComments]);
   };
+
 
   return (
     <div className="text-black p-5 rounded-lg shadow-lg">
@@ -65,7 +69,13 @@ const DetailBlogId = ({
         ))}
       </div>
       <div className="my-6">
-      <Comments key={commentsState.id} comments={commentsState} postId={blogId} onCommentAdded={handleAddComment} />
+        <Comments
+          key={commentsState.id}
+          authorId={authorId}
+          comments={commentsState}
+          postId={blogId}
+          onCommentAdded={handleAddComment}
+        />
       </div>
     </div>
   );
