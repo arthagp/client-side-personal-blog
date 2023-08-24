@@ -45,7 +45,8 @@ const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
           {initTitle}
         </Link>
       </h2>
-      <p className="mt-2 font-light line-clamp-3">{initDesc}</p>
+      <div className="mt-2 font-light line-clamp-3" dangerouslySetInnerHTML={{ __html: initDesc }} />
+
       <div className="mt-2 flex flex-wrap gap-3">
         {initTags.map((tag, index) => (
           <div
@@ -56,7 +57,6 @@ const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
             style={{ minWidth: `${tag.length * 10}px` }}
           >
             {tag}
-            {/* {console.log(tag.id)} */}
           </div>
         ))}
       </div>

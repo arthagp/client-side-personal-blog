@@ -53,7 +53,7 @@ const findAllBlog = async () => {
 const findBlogById = async (postId) => {
   try {
     const response = await instance.get(`/detail-post/${postId}`);
-    return response;
+    return response.data;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
@@ -86,6 +86,42 @@ const deleteComment = async (commentId) => {
   }
 };
 
+const getAllTags = async () => {
+  try {
+    const response = await instance.get('/all-tags');
+    return response.data
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+}
+
+const createNewBlog = async ({title, description, tagsId}) => {
+  try {
+    const response = await instance.post('/new-post', {title, description, tagsId})
+    return response.data
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+}
+
+const editBlogById = async ({postId, title, description, tagsId}) => {
+  try {
+    const response = await instance.put(`/edit-post/${postId}`, {title, description, tagsId});
+    return response.data
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+}
+
 module.exports = {
   userLogin,
   userRegister,
@@ -94,4 +130,7 @@ module.exports = {
   findBlogById,
   createComment,
   deleteComment,
+  getAllTags,
+  createNewBlog,
+  editBlogById
 };

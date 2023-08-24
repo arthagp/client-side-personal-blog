@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Comments from "./Comments";
-import Cookies from "js-cookie";
+import Link from "next/link";
 
 const DetailBlogId = ({
   initDate,
@@ -11,6 +11,9 @@ const DetailBlogId = ({
   comments,
   blogId,
   authorId,
+  currentUsername,
+  initUserComment,
+  initLink
 }) => {
   const formatDate = (dateString) => {
     const options = {
@@ -39,12 +42,11 @@ const DetailBlogId = ({
   ];
 
   const [commentsState, setCommentsState] = useState(comments);
-  console.log('Common state: ',commentsState)
+  // console.log('Common state: ',commentsState)
 
   const handleAddComment = (newComment) => {
     setCommentsState((prevComments) => [newComment, ...prevComments]);
   };
-
 
   return (
     <div className="text-black p-5 rounded-lg shadow-lg">
@@ -55,7 +57,7 @@ const DetailBlogId = ({
         alt="fakeimage"
         className="w-full h-[350px] object-cover mt-4 rounded-md"
       />
-      <p className="mt-4">{initDesc}</p>
+      <div className="mt-4" dangerouslySetInnerHTML={{ __html: initDesc }} />
       <div className="mt-4 flex flex-wrap gap-2">
         {initTags.map((tag, index) => (
           <div
@@ -68,6 +70,16 @@ const DetailBlogId = ({
           </div>
         ))}
       </div>
+      {currentUsername === initUserComment && (
+        <div className="flex justify-end">
+          <Link href={initLink}>
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded">
+              Edit Blog
+            </button>
+          </Link>
+        </div>
+      )}
+
       <div className="my-6">
         <Comments
           key={commentsState.id}

@@ -3,8 +3,6 @@ import React, {useState, useEffect} from "react";
 import Image from "next/image";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {deleteComment} from '@/app/api/fetch'
-import Cookies from "js-cookie";
-import { findBlogById } from "@/app/api/fetch";
 
 
 const Message = ({ comment, initDate, initUserComment, author, commentId, currentUsername}) => {
@@ -33,7 +31,7 @@ const Message = ({ comment, initDate, initUserComment, author, commentId, curren
   };
 
   if (isDeleted) {
-    return null; // Hide the comment if it's deleted
+    return null;
   }
 
   
