@@ -65,6 +65,7 @@ const DetailBlog = ({ params }) => {
               currentUsername={currUser}
               initUserComment={blog.User.username}
               initLink={`/dashboard/${params.slug}/edit-blog`}
+              postId={params.slug}
             />
           </div>
         </div>

@@ -29,3 +29,11 @@ body {
 .white_btn {
   @apply rounded-full border text-black border-white py-1.5 px-5 transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
+
+.modal_overlay{
+  top: 50%;
+  bottom: 50%;
+  margin: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

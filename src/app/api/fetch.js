@@ -77,7 +77,7 @@ const createComment = async ({ postId, comment }) => {
 const deleteComment = async (commentId) => {
   try {
     const response = await instance.delete(`/comment/${commentId}`);
-    return response
+    return response;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
@@ -88,39 +88,59 @@ const deleteComment = async (commentId) => {
 
 const getAllTags = async () => {
   try {
-    const response = await instance.get('/all-tags');
-    return response.data
+    const response = await instance.get("/all-tags");
+    return response.data;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
       console.log("Something Went Wrong")
     );
   }
-}
+};
 
-const createNewBlog = async ({title, description, tagsId}) => {
+const createNewBlog = async ({ title, description, tagsId }) => {
   try {
-    const response = await instance.post('/new-post', {title, description, tagsId})
-    return response.data
+    const response = await instance.post("/new-post", {
+      title,
+      description,
+      tagsId,
+    });
+    return response.data;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
       console.log("Something Went Wrong")
     );
   }
-}
+};
 
-const editBlogById = async ({postId, title, description, tagsId}) => {
+const editBlogById = async ({ postId, title, description, tagsId }) => {
   try {
-    const response = await instance.put(`/edit-post/${postId}`, {title, description, tagsId});
-    return response.data
+    const response = await instance.put(`/edit-post/${postId}`, {
+      title,
+      description,
+      tagsId,
+    });
+    return response.data;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||
       console.log("Something Went Wrong")
     );
   }
-}
+};
+
+const deleteBlogById = async (postId) => {
+  try {
+    const response = await instance.delete(`/delete-post/${postId}`);
+    return response.data;
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+};
 
 module.exports = {
   userLogin,
@@ -132,5 +152,6 @@ module.exports = {
   deleteComment,
   getAllTags,
   createNewBlog,
-  editBlogById
+  editBlogById,
+  deleteBlogById,
 };
