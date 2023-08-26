@@ -1,9 +1,13 @@
 import Signin from "@/components/Signin";
 
-export default function LoginPage() {
+import React from "react";
+
+const LoginPage = () => {
   return (
-    <>
+    <div>
       <Signin />
-    </>
+    </div>
   );
-}
+};
+
+export default LoginPage;

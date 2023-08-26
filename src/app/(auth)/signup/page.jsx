@@ -1,9 +1,13 @@
 import Signup from "@/components/Signup";
 
-export default function RegisterPage() {
+import React from "react";
+
+const SignUpPage = () => {
   return (
-    <>
-      <Signup/>
-    </>
+    <div>
+      <Signup />
+    </div>
   );
-}
+};
+
+export default SignUpPage;

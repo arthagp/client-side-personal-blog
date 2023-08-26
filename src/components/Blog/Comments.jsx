@@ -8,6 +8,8 @@ const Comments = ({ comments, postId, onCommentAdded, authorId}) => {
   const [isComment, isSetComment] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
+  const getUsernameAtCookies = Cookies.get("username");
+
   const handleInputChange = (e) => {
     if (!getUsernameAtCookies || null) {
       return setIsLogged(true);
@@ -15,28 +17,28 @@ const Comments = ({ comments, postId, onCommentAdded, authorId}) => {
     setComment(e.target.value);
   };
 
-  const getUsernameAtCookies = Cookies.get("username");
-
   const handleCreateComment = async (e) => {
     e.preventDefault();
 
-    if (!comment.trim()) {
+    if (!comment.trim()) { //menghapus spasi di awal dan akhir sebuah string, sehingga ini string tidak bisa kosong dengan char
       return isSetComment(true);
     }
-
+  
     try {
       const response = await createComment({ postId, comment });
+      // console.log(response.data.data.id)
 
-      const newComment = {
-        id: response.data.id,
-        comment: comment,
-        createdAt: new Date().toISOString(),
-        User: {
-          username: `${getUsernameAtCookies}`,
-        },
-      };
-
-      onCommentAdded(newComment);
+      if (response) {
+        const newComment = {
+          id: response.data.id,
+          comment: comment,
+          createdAt: new Date().toISOString(),
+          User: {
+            username: `${getUsernameAtCookies}`,
+          },
+        };
+        onCommentAdded(newComment); // melemapar fungsi dengan argumen berisi object createComment dilemparkan ke component DetailBlogId. agar ngetrigger render
+      }
       setComment("");
     } catch (error) {
       console.log("Error creating comment:", error);

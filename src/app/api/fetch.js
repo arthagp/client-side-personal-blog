@@ -65,7 +65,7 @@ const findBlogById = async (postId) => {
 const createComment = async ({ postId, comment }) => {
   try {
     const response = await instance.post(`/new-comment/${postId}`, { comment });
-    return response;
+    return response.data;
   } catch (error) {
     throw (
       new Error(error.response.data.message) ||

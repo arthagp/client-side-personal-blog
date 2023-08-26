@@ -6,8 +6,9 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { findUserAndId } from "@/app/api/fetch";
 
+
 const Navbar = () => {
-  const routerName = usePathname();
+  const routerName = usePathname(); //hooks dari nextjs untuk melihat currentUrl 
   const router = useRouter();
   const [username, setUsername] = useState([]);
 
@@ -28,7 +29,7 @@ const Navbar = () => {
     fetchUserData();
   }, []);
 
-  const loggedInUsername = getUsername || 1234; //sementara di buat seperti ini karena jika getUsername === null, maka akan error jadi butuh suatu untuk melakukan kondisional
+  const loggedInUsername = getUsername || 1234; //1234 di buat untuk perbandingan, karena ini di butuhkan untuk perbandingan menggunakan method includes nantinya untuk kondisional rendering includes(), jadi jika ini null/undefined maka method includes tidak berfungsi sehingga menyebabkan error.
 
   const handleLog = () => {
     if (loggedInUsername) {
@@ -47,10 +48,11 @@ const Navbar = () => {
           isPage ? `border-b-[1px] pb-4 border-black` : null
         }`}
       >
-        {username.includes(loggedInUsername) ? (
+        {/* mengecek apakah array pada username includes/termasuk apa yang ada di dalam argumen includes tersebut yang mana argumen berisi username yang sedang login, di peroleh dari cookies*/}
+        {username.includes(loggedInUsername) ? ( 
           <h1 className="text-xl font-semibold">Welcome {loggedInUsername}</h1>
         ) : (
-          <Link href='/dashboard'>
+          <Link href="/dashboard">
             <h1 className="text-xl font-semibold">THE BLOG.</h1>
           </Link>
         )}
@@ -59,9 +61,11 @@ const Navbar = () => {
             <li>
               <Link href="/dashboard">Dashboard</Link>
             </li>
-            <li>
-              <Link href="/new-blog">New Blog</Link>
-            </li>
+            {username.includes(loggedInUsername) && (
+              <li>
+                <Link href="/new-blog">New Blog</Link>
+              </li>
+            )}
             <li>
               <Link href="/profile">Profile</Link>
             </li>

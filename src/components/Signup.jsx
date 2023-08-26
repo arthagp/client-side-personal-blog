@@ -3,7 +3,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useRouter } from "next/navigation"; // Menggunakan "next/router" bukan "next/navigation"
+import { useRouter } from "next/navigation";
 import { userRegister } from "@/app/api/fetch";
 import Image from "next/image";
 
@@ -12,7 +12,7 @@ const Signup = () => {
 
   const isSuccess = async (values) => {
     try {
-      const response = await userRegister(values.username, values.password);
+      const response = await userRegister(values.username, values.password); // mengambil values dari formik sehingga harus menggunakan values.username
       console.log(response.data);
       toast.success("Registration successful", {
         position: "top-right",
@@ -24,7 +24,7 @@ const Signup = () => {
         progress: undefined,
         theme: "light",
       });
-      router.push("/login");
+      window.location.reload();
     } catch (error) {
       toast.error(`${error.message}`, {
         position: "top-right",
@@ -40,6 +40,7 @@ const Signup = () => {
   };
 
   const formik = useFormik({
+    // value.(properti)
     initialValues: {
       username: "",
       password: "",
@@ -64,8 +65,6 @@ const Signup = () => {
     }),
   });
 
-  console.log(formik.values.username)
-
   return (
     <div>
       <div className="w-3/5 mx-auto m-16 flex justify-center items-center bg-slate-800 text-white rounded-xl p-8">
@@ -80,7 +79,7 @@ const Signup = () => {
         </div>
         <div className="w-5/12 flex flex-col items-center justify-center p-8">
           <h2 className="text-2xl font-semibold mb-2">THE BLOG</h2>
-          <p className="mb-4">Login Into Your Account</p>
+          <p className="mb-4">Register Account</p>
           <form onSubmit={formik.handleSubmit}>
             <div className="mb-4">
               <label htmlFor="username" className="mb-1 font-thin">

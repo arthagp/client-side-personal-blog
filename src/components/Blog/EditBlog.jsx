@@ -109,7 +109,7 @@ const EditBlog = ({ postId, initLink }) => {
 
   return (
     <div className="max-w-screen-md mx-auto p-4 bg-gray-100 rounded border mt-10">
-      <h2 className="text-2xl font-semibold mb-4">New Blog</h2>
+      <h2 className="text-2xl font-semibold mb-4">Edit Blog</h2>
       <div className="bg-white p-4 rounded border">
         <label htmlFor="title" className="block font-medium mb-2">
           Title :

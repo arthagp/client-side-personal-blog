@@ -8,7 +8,6 @@ import {deleteComment} from '@/app/api/fetch'
 const Message = ({ comment, initDate, initUserComment, author, commentId, currentUsername}) => {
   const [isDeleted, setIsDeleted] = useState(false);
 
-
   const handleDeleteComment = async () => {
     try {
       await deleteComment(commentId);
@@ -33,6 +32,7 @@ const Message = ({ comment, initDate, initUserComment, author, commentId, curren
   if (isDeleted) {
     return null;
   }
+
 
   
   return (

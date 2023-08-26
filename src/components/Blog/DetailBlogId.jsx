@@ -111,13 +111,20 @@ const DetailBlogId = ({
     },
   };
 
-
-  const [commentsState, setCommentsState] = useState(comments);
-  // console.log('Common state: ',commentsState)
-
+  const [commentsState, setCommentsState] = useState(comments); //berisi comment
+  
+  // const existingFruits = ["apple", "banana", "orange"];
+  // const newFruit = "grape";
+  
+  // const updatedFruits = [newFruit, ...existingFruits]; 
+  // ["grape", "apple", "banana", "orange"]
+  
   const handleAddComment = (newComment) => {
-    setCommentsState((prevComments) => [newComment, ...prevComments]);
+    setCommentsState((prevComments) => [newComment, ...prevComments]); // menambahkan newComment ke dalam array blog.Comments
+    console.log(newComment)
   };
+
+  console.log(commentsState, '<<<< comment state')
 
   return (
     <div className="text-black p-5 rounded-lg shadow-lg">

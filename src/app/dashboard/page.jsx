@@ -7,23 +7,33 @@ import Hero from "@/components/Home/Hero";
 import { useEffect, useState } from "react";
 import { findAllBlog } from "@/app/api/fetch";
 
-export default function Home() {
+import React from "react";
+
+const HomePage = () => {
   const [blogs, setBlogs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [blogsPerPage] = useState(6);
+
+  const fetchData = async () => {
+    try {
+      const response = await findAllBlog();
+      setBlogs(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await findAllBlog();
-        setBlogs(response.data);
-        // console.log(response.data)
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
     fetchData();
   }, []);
 
-  // console.log(blogs.map(blog => blog.id))
+  // Menghitung indeks blog pada halaman saat ini
+  const indexOfLastBlog = currentPage * blogsPerPage;
+  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
+  const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   if (!blogs) {
     return <div>Loading...</div>;
   }
@@ -42,22 +52,38 @@ export default function Home() {
       </div>
       <h1 className="ml-[105px] my-5 font-bold text-xl">All Blog Post</h1>
       <div className="grid grid-cols-3 gap-4 px-[105px]">
-        {!blogs ? (
-          <div>Loading...</div>
-        ) : (
-          blogs.map((blog) => (
-            <Card
-              key={blog.id}
-              blog={blog.id}
-              initDate={blog.createdAt}
-              initUser={blog.username}
-              initDesc={blog.description}
-              initTitle={blog.title}
-              initTags={blog.Tags.map((tag) => tag.name)}
-            />
-          ))
+        {currentBlogs.map((blog) => (
+          <Card
+            key={blog.id}
+            blog={blog.id}
+            initDate={blog.createdAt}
+            initUser={blog.username}
+            initDesc={blog.description}
+            initTitle={blog.title}
+            initTags={blog.Tags.map((tag) => tag.name)}
+          />
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-5">
+        {Array.from(
+          { length: Math.ceil(blogs.length / blogsPerPage) },
+          (_, i) => (
+            <button
+              key={i}
+              onClick={() => paginate(i + 1)}
+              className={`mx-1 px-3 py-1 rounded-full ${
+                currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
+            >
+              {i + 1}
+            </button>
+          )
         )}
       </div>
     </>
   );
-}
+};
+
+export default HomePage;

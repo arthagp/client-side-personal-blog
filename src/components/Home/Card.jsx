@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 
 const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
@@ -32,7 +32,7 @@ const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg">
       <img
-        src="https://fakeimg.pl/350x200/"
+        src="https://fakeimg.pl/350x200/" //sementara menggunakan fakeimg
         alt="fakeimage"
         className="w-full h-48 object-cover rounded-md"
       />
@@ -41,20 +41,20 @@ const Card = ({ blog, initUser, initDate, initTitle, initDesc, initTags }) => {
       </p>
       <h2 className="mt-2 font-bold text-xl line-clamp-2">
         <Link href={`/dashboard/${blog}`}>
-          {console.log(blog)}
           {initTitle}
         </Link>
       </h2>
-      <div className="mt-2 font-light line-clamp-3" dangerouslySetInnerHTML={{ __html: initDesc }} />
-
+      {/* menggunakan properti dari react untuk mengabaikan desc yang memiliki tag html, yang akan di tampilkan << innerHtml */}
+      <div className="mt-2 font-light line-clamp-3" dangerouslySetInnerHTML={{ __html: initDesc }} /> 
       <div className="mt-2 flex flex-wrap gap-3">
+        {/* membuat sebuag tag elemen dengan map, yang mana ini berfungsi untuk menampilkan elemen yang berisi tag dengan bisa lebih dari satu elemen tag yang di tampilkan */}
         {initTags.map((tag, index) => (
           <div
             key={index}
             className={`rounded-xl ${
-              colorRandom[index % colorRandom.length]
+              colorRandom[index % colorRandom.length] //untuk merandom color
             } h-6 flex justify-center text-center items-center text-slate-600 text-sm font-semibold whitespace-nowrap px-2`}
-            style={{ minWidth: `${tag.length * 10}px` }}
+            style={{ minWidth: `${tag.length * 10}px` }} //untuk menyesuaikan ukuran elemen setiap tag yang dibuat dengan panjang dari tag di kalikan 10 pixel, agar lebih dinamis
           >
             {tag}
           </div>

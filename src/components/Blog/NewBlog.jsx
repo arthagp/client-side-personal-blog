@@ -31,7 +31,6 @@ const NewBlog = () => {
     }
   };
 
-  console.log(isTitleTooLong)
 
   const handleTagChange = (selectedOptions) => {
     setSelectedTags(selectedOptions);
@@ -46,8 +45,6 @@ const NewBlog = () => {
     }
   };
 
-  const len = title.length;
-  console.log(len);
 
   const selectedTagIds = selectedTags.map((tag) => tag.value); // mendapatkan id dari multi option
 
