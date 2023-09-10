@@ -142,6 +142,18 @@ const deleteBlogById = async (postId) => {
   }
 };
 
+const getMyBlog = async () => {
+  try {
+    const response = await instance.get('/my-blog')
+    return response.data
+  } catch (error) {
+    throw (
+      new Error(error.response.data.message) ||
+      console.log("Something Went Wrong")
+    );
+  }
+}
+
 module.exports = {
   userLogin,
   userRegister,
@@ -154,4 +166,5 @@ module.exports = {
   createNewBlog,
   editBlogById,
   deleteBlogById,
+  getMyBlog
 };

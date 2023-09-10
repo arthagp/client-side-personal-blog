@@ -113,11 +113,6 @@ const DetailBlogId = ({
 
   const [commentsState, setCommentsState] = useState(comments); //berisi comment
   
-  // const existingFruits = ["apple", "banana", "orange"];
-  // const newFruit = "grape";
-  
-  // const updatedFruits = [newFruit, ...existingFruits]; 
-  // ["grape", "apple", "banana", "orange"]
   
   const handleAddComment = (newComment) => {
     setCommentsState((prevComments) => [newComment, ...prevComments]); // menambahkan newComment ke dalam array blog.Comments

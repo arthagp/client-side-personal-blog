@@ -9,7 +9,6 @@ import { findUserAndId } from "@/app/api/fetch";
 
 const Navbar = () => {
   const routerName = usePathname(); //hooks dari nextjs untuk melihat currentUrl 
-  const router = useRouter();
   const [username, setUsername] = useState([]);
 
   const isPage = routerName === "/login" || routerName === "/signup";
@@ -35,7 +34,6 @@ const Navbar = () => {
     if (loggedInUsername) {
       const attribute = ["id", "token", "username"];
       attribute.forEach((attr) => Cookies.remove(attr));
-      router.push("/login");
     } else {
       setUsername(null);
     }
@@ -68,6 +66,9 @@ const Navbar = () => {
             )}
             <li>
               <Link href="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link href="/dashboard/my-blog">My Blog</Link>
             </li>
           </ul>
           <div>
